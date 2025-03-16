@@ -6,18 +6,18 @@ async function postData(user) {
   try {
     const response = await fetch("https://localhost3000/userData", {
       method: "POST",
-      body: JSON.stringify(user)
-    })
+      body: JSON.stringify(parseInputData())
+    });
 
     if (!response.ok) {
       throw new Error("HTTP error: " + response.status.toString());
-    }
+    };
   } catch (e) {
     console.error("Error: " + e);
-  }
+  };
 
   return { response, e }
-}
+};
 
 function parseInputData() {
   const [username, setUsername] = useState(false);
@@ -30,7 +30,8 @@ function parseInputData() {
   setUsername(true) :
   setUsername(false);
 
-  document.getElementById("password").value !== "" ?
+  document.getElementById("password").value !== "" && 
+  !document.getElementById("password").value.includes(" ") ?
   setPassword(true) :
   setPassword(false);
 
